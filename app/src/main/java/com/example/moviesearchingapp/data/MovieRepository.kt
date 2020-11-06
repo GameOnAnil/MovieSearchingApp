@@ -1,4 +1,4 @@
-package com.example.moviesearchingapp.ui
+package com.example.moviesearchingapp.data
 
 import com.example.moviesearchingapp.data.network.MovieApi
 import com.example.moviesearchingapp.model.Movie
