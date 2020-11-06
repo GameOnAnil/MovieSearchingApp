@@ -7,12 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.example.moviesearchingapp.R
 import com.example.moviesearchingapp.databinding.FragmentDetailsBinding
-import com.example.moviesearchingapp.model.Movie
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -30,9 +26,7 @@ class DetailsFragment : Fragment() {
         _binding = FragmentDetailsBinding.inflate(layoutInflater)
 
         val args = DetailsFragmentArgs.fromBundle(requireArguments())
-        val movie = args.movie
-        val adapterPosition = args.position
-        val currentMovie = movie.results[adapterPosition]
+        val currentMovie = args.movie
 
         binding.apply {
             detailTitle.text = currentMovie.title

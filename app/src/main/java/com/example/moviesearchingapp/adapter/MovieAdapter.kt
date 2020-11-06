@@ -6,14 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesearchingapp.databinding.MainRecyclerListBinding
 import com.example.moviesearchingapp.model.Movie
+import com.example.moviesearchingapp.model.MovieResponse
 
 class MovieAdapter(
     private val movieListener: MovieListener
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var movieList: Movie? = null
+    private var movieList: List<Movie>? = null
 
-    fun setMovie(movie: Movie) {
+    fun setMovie(movie: List<Movie>) {
         movieList = movie
     }
 
@@ -25,7 +26,7 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val currentMovie = movieList
+        val currentMovie = movieList?.get(position)
         if (currentMovie != null) {
             holder.bindTo(currentMovie)
         }
@@ -33,7 +34,7 @@ class MovieAdapter(
 
     override fun getItemCount(): Int {
         return if (movieList != null) {
-            movieList!!.results.size
+            movieList!!.size
         } else 0
     }
 
@@ -45,7 +46,7 @@ class MovieAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val item = movieList
+                    val item = movieList?.get(position)
                     if (item != null) {
                         movieListener.onMovieClicked(item, position)
                     }
@@ -56,10 +57,10 @@ class MovieAdapter(
         fun bindTo(movie: Movie) {
 
             binding.apply {
-                titleText.text = movie.results[adapterPosition].title
+                titleText.text = movie.title
 
                 val imageUrl =
-                    "https://image.tmdb.org/t/p/w500" + movie.results[adapterPosition].poster_path
+                    "https://image.tmdb.org/t/p/w500" + movie.poster_path
 
                 Glide.with(itemView)
                     .load(imageUrl)
