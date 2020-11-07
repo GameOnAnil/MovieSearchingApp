@@ -13,4 +13,13 @@ class MovieRepository
     fun searchMovie(apiKey: String, query: String): Call<MovieResponse> {
         return movieApi.searchMovie(apiKey, query)
     }
+
+    fun getPopularMovies(apiKey: String) =
+        movieApi.getPopularMovies(apiKey)
+
+    fun getTopRatedMovies(apiKey: String) =
+        movieApi.getTopRatedMovies(apiKey)
+
+    fun getUpComingMovies(apiKey: String) =
+        movieApi.getUpComingMovies(apiKey)
 }

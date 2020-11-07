@@ -19,14 +19,16 @@ class MovieViewModel
     companion object {
         private const val TAG = "BookViewModel"
     }
+
     init {
-        searchMovie(Constants.API_KEY, "avengers")
+        searchMovie("avenger")
+        // getPopularMovies(Constants.API_KEY)
     }
 
     val searchedMovies: MutableLiveData<List<Movie>> = MutableLiveData()
 
-    private fun searchMovie(apiKey: String, query: String) {
-        repository.searchMovie(Constants.API_KEY, "avenger")
+    fun searchMovie(query: String) {
+        repository.searchMovie(Constants.API_KEY, query)
             .enqueue(object : Callback<MovieResponse> {
                 override fun onResponse(
                     call: Call<MovieResponse>,
@@ -39,6 +41,57 @@ class MovieViewModel
                 override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                     Log.d(TAG, "onFailure: response: ${t.message}")
 
+                }
+            })
+    }
+
+    fun getPopularMovies() {
+        repository.getPopularMovies(Constants.API_KEY)
+            .enqueue(object : Callback<MovieResponse> {
+                override fun onResponse(
+                    call: Call<MovieResponse>,
+                    response: Response<MovieResponse>
+                ) {
+                    Log.d(TAG, "onResponse: response result: ${response.body()?.results?.size}")
+                    searchedMovies.value = response.body()?.results
+                }
+
+                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                    Log.d(TAG, "onFailure: response: ${t.message}")
+                }
+            })
+    }
+
+    fun getTopRatedMovies() {
+        repository.getTopRatedMovies(Constants.API_KEY)
+            .enqueue(object : Callback<MovieResponse> {
+                override fun onResponse(
+                    call: Call<MovieResponse>,
+                    response: Response<MovieResponse>
+                ) {
+                    Log.d(TAG, "onResponse: response result: ${response.body()?.results?.size}")
+                    searchedMovies.value = response.body()?.results
+                }
+
+                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                    Log.d(TAG, "onFailure: response: ${t.message}")
+                }
+            })
+    }
+
+    fun getUpComingMovies() {
+        repository.getUpComingMovies(Constants.API_KEY)
+            .enqueue(object : Callback<MovieResponse> {
+                override fun onResponse(
+                    call: Call<MovieResponse>,
+                    response: Response<MovieResponse>
+                ) {
+                    Log.d(TAG, "onResponse: response result: ${response.body()?.results?.size}")
+                    searchedMovies.value = response.body()?.results
+                }
+
+                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                    Log.d(TAG, "onFailure: response: ${t.message}")
                 }
             })
     }
