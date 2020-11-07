@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.moviesearchingapp.R
 import com.example.moviesearchingapp.databinding.MainRecyclerListBinding
 import com.example.moviesearchingapp.model.Movie
-import com.example.moviesearchingapp.model.MovieResponse
 
 class MovieAdapter(
     private val movieListener: MovieListener
@@ -57,14 +57,14 @@ class MovieAdapter(
         fun bindTo(movie: Movie) {
 
             binding.apply {
+                val imageUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path
                 titleText.text = movie.title
-
-                val imageUrl =
-                    "https://image.tmdb.org/t/p/w500" + movie.poster_path
-
-                Glide.with(itemView)
-                    .load(imageUrl)
-                    .into(imageViewMain)
+                if (movie.poster_path != null) {
+                    Glide.with(itemView)
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_baseline_image_24)
+                        .into(imageViewMain)
+                }
 
             }
         }

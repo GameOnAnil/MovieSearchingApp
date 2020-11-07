@@ -9,7 +9,7 @@
         android:id="@+id/image_view_main"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        tools:src="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/ic_baseline_image_24" />
 
     <TextView
         android:id="@+id/title_text"
