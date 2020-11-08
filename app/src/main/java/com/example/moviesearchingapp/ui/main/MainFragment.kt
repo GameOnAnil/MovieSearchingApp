@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.paging.filter
 import com.example.moviesearchingapp.R
 import com.example.moviesearchingapp.adapter.MovieAdapter
 import com.example.moviesearchingapp.databinding.FragmentMainBinding
@@ -40,8 +41,13 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
 
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        movieViewModel.searchedMovies.observe(viewLifecycleOwner, Observer {
-            movieAdapter.setMovie(it)
+        /* movieViewModel.searchedMovies.observe(viewLifecycleOwner, Observer {
+             movieAdapter.setMovie(it)
+             movieAdapter.notifyDataSetChanged()
+         })*/
+
+        movieViewModel.movies.observe(viewLifecycleOwner, Observer {
+            movieAdapter.submitData(viewLifecycleOwner.lifecycle, it)
             movieAdapter.notifyDataSetChanged()
         })
 
@@ -71,7 +77,7 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     binding.recyclerViewMain.scrollToPosition(0)
-                    movieViewModel.searchMovie(query)
+                    movieViewModel.searchWithQuery(query)
                     searchView.clearFocus()
                 }
                 return true

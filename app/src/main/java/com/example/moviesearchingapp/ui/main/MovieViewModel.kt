@@ -1,9 +1,10 @@
 package com.example.moviesearchingapp.ui.main
 
 import android.util.Log
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import androidx.paging.cachedIn
 import com.example.moviesearchingapp.data.MovieRepository
 import com.example.moviesearchingapp.model.Movie
 import com.example.moviesearchingapp.model.MovieResponse
@@ -15,34 +16,31 @@ import retrofit2.Response
 
 @ViewScoped
 class MovieViewModel
-@ViewModelInject constructor(private val repository: MovieRepository) : ViewModel() {
+@ViewModelInject constructor(
+    private val repository: MovieRepository,
+    @Assisted state: SavedStateHandle
+) : ViewModel() {
     companion object {
         private const val TAG = "BookViewModel"
+        private const val CURRENT_QUERY = "current_query"
+        private const val DEFAULT_QUERY = "avengers"
     }
 
     init {
-        searchMovie("avenger")
+        //searchMovie("avenger")
         // getPopularMovies(Constants.API_KEY)
     }
 
     val searchedMovies: MutableLiveData<List<Movie>> = MutableLiveData()
 
-    fun searchMovie(query: String) {
-        repository.searchMovie(Constants.API_KEY, query)
-            .enqueue(object : Callback<MovieResponse> {
-                override fun onResponse(
-                    call: Call<MovieResponse>,
-                    response: Response<MovieResponse>
-                ) {
-                    Log.d(TAG, "onResponse: response result: ${response.body()?.results?.size}")
-                    searchedMovies.value = response.body()?.results
-                }
+    private val currentQuery = state.getLiveData(CURRENT_QUERY, DEFAULT_QUERY)
 
-                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                    Log.d(TAG, "onFailure: response: ${t.message}")
+    val movies = currentQuery.switchMap { queryString ->
+        repository.pagingSearch(queryString).cachedIn(viewModelScope)
+    }
 
-                }
-            })
+    fun searchWithQuery(query: String) {
+        currentQuery.value = query
     }
 
     fun getPopularMovies() {
