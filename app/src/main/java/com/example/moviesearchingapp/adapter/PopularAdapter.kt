@@ -1,4 +1,3 @@
-/*
 package com.example.moviesearchingapp.adapter
 
 import android.view.LayoutInflater
@@ -9,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesearchingapp.R
 import com.example.moviesearchingapp.databinding.MainRecyclerListBinding
+import com.example.moviesearchingapp.databinding.RecyclerPopularListBinding
 import com.example.moviesearchingapp.databinding.RecyclerUpcomingListBinding
 import com.example.moviesearchingapp.model.Movie
 
-class MovieAdapter(
-    private val movieListener: MovieListener
-) : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_DIFF_UTIL) {
+class PopularAdapter(
+    private val popularListener: PopularListener
+) : PagingDataAdapter<Movie, PopularAdapter.MovieViewHolder>(MOVIE_DIFF_UTIL) {
 
     companion object {
         val MOVIE_DIFF_UTIL = object : DiffUtil.ItemCallback<Movie>() {
@@ -30,7 +30,7 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding =
-            RecyclerUpcomingListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RecyclerPopularListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
     }
 
@@ -41,7 +41,7 @@ class MovieAdapter(
         }
     }
 
-    inner class MovieViewHolder(private val binding: RecyclerUpcomingListBinding) :
+    inner class MovieViewHolder(private val binding: RecyclerPopularListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -50,7 +50,7 @@ class MovieAdapter(
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
                     if (item != null) {
-                        movieListener.onMovieClicked(item, position)
+                        popularListener.onPopularMovieClicked(item, position)
                     }
                 }
             }
@@ -74,8 +74,8 @@ class MovieAdapter(
 
     }
 
-    interface MovieListener {
-        fun onMovieClicked(movie: Movie, position: Int)
+    interface PopularListener {
+        fun onPopularMovieClicked(movie: Movie, position: Int)
     }
 
-}*/
+}

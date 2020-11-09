@@ -1,4 +1,3 @@
-/*
 package com.example.moviesearchingapp.adapter
 
 import android.view.LayoutInflater
@@ -12,9 +11,9 @@ import com.example.moviesearchingapp.databinding.MainRecyclerListBinding
 import com.example.moviesearchingapp.databinding.RecyclerUpcomingListBinding
 import com.example.moviesearchingapp.model.Movie
 
-class MovieAdapter(
+class UpcomingMovieAdapter(
     private val movieListener: MovieListener
-) : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_DIFF_UTIL) {
+) : PagingDataAdapter<Movie, UpcomingMovieAdapter.MovieViewHolder>(MOVIE_DIFF_UTIL) {
 
     companion object {
         val MOVIE_DIFF_UTIL = object : DiffUtil.ItemCallback<Movie>() {
@@ -78,4 +77,4 @@ class MovieAdapter(
         fun onMovieClicked(movie: Movie, position: Int)
     }
 
-}*/
+}

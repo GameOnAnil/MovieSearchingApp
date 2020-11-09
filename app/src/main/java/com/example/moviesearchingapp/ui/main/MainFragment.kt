@@ -3,28 +3,31 @@ package com.example.moviesearchingapp.ui.main
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.annotation.UiThread
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.paging.filter
 import com.example.moviesearchingapp.R
-import com.example.moviesearchingapp.adapter.MovieAdapter
+import com.example.moviesearchingapp.adapter.PopularAdapter
+import com.example.moviesearchingapp.adapter.TopRatedAdapter
+import com.example.moviesearchingapp.adapter.UpcomingMovieAdapter
 import com.example.moviesearchingapp.databinding.FragmentMainBinding
 import com.example.moviesearchingapp.model.Movie
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainFragment : Fragment(), MovieAdapter.MovieListener {
+class MainFragment : Fragment(), UpcomingMovieAdapter.MovieListener, PopularAdapter.PopularListener,
+    TopRatedAdapter.TopRatedListener {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var movieViewModel: MovieViewModel
-    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var upcomingMovieAdapter: UpcomingMovieAdapter
+    private lateinit var topRatedAdapter: TopRatedAdapter
+    private lateinit var popularAdapter: PopularAdapter
+
 
     companion object {
         private const val TAG = "MainFragment"
@@ -36,17 +39,37 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
     ): View? {
         _binding = FragmentMainBinding.inflate(layoutInflater)
 
-        movieAdapter = MovieAdapter(this)
+        upcomingMovieAdapter = UpcomingMovieAdapter(this)
+        topRatedAdapter = TopRatedAdapter(this)
+        popularAdapter = PopularAdapter(this)
 
-        binding.recyclerViewMainUpcoming.adapter = movieAdapter
-        binding.recyclerViewMainUpcoming.setHasFixedSize(true)
+        binding.apply {
+            recyclerViewMainUpcoming.adapter = upcomingMovieAdapter
+            recyclerTopRated.adapter = topRatedAdapter
+            recyclerPopular.adapter = popularAdapter
+
+            recyclerViewMainUpcoming.setHasFixedSize(true)
+            recyclerTopRated.setHasFixedSize(true)
+            recyclerPopular.setHasFixedSize(true)
+        }
+
 
 
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        movieViewModel.movies.observe(viewLifecycleOwner, Observer {
-            movieAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-            movieAdapter.notifyDataSetChanged()
+        movieViewModel.upcomingMovies.observe(viewLifecycleOwner, Observer {
+            upcomingMovieAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            upcomingMovieAdapter.notifyDataSetChanged()
+        })
+
+        movieViewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
+            topRatedAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            topRatedAdapter.notifyDataSetChanged()
+        })
+
+        movieViewModel.popularMovies.observe(viewLifecycleOwner, Observer {
+            popularAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            popularAdapter.notifyDataSetChanged()
         })
 
         setHasOptionsMenu(true)
@@ -103,7 +126,7 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
             }
             R.id.item_upcoming_movies -> {
                 Log.d(TAG, "onOptionsItemSelected: Upcoming Movies clicked")
-                movieViewModel.getUpComingMovies()
+
                 return true
             }
             else -> {
@@ -111,6 +134,16 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
             }
         }
 
+    }
+
+    override fun onPopularMovieClicked(movie: Movie, position: Int) {
+        val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(movie, position)
+        findNavController().navigate(action)
+    }
+
+    override fun onTopRatedMovieClicked(movie: Movie, position: Int) {
+        val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(movie, position)
+        findNavController().navigate(action)
     }
 
 

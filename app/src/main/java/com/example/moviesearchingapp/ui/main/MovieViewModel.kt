@@ -22,20 +22,18 @@ class MovieViewModel
     }
 
     private val currentQuery = state.getLiveData(CURRENT_QUERY, DEFAULT_QUERY)
-    var movies: MutableLiveData<PagingData<Movie>> = MutableLiveData()
-/*
 
-       init {
-           movies.value = repository.getUpComingMovies()
-               .cachedIn(viewModelScope).value
-       }
-*/
+    /*
 
-    init {
-        movies = currentQuery.switchMap { queryString ->
-            repository.pagingSearch(queryString).cachedIn(viewModelScope)
-        } as MutableLiveData<PagingData<Movie>>
-    }
+           init {
+               movies.value = repository.getUpComingMovies()
+                   .cachedIn(viewModelScope).value
+           }
+    */
+    val upcomingMovies = repository.getUpComingMovies().cachedIn(viewModelScope)
+    val topRatedMovies = repository.getTopRatedMovies().cachedIn(viewModelScope)
+    val popularMovies = repository.getPopularMovies().cachedIn(viewModelScope)
+
 
     fun searchWithQuery(query: String) {
         currentQuery.value = query
@@ -75,10 +73,5 @@ class MovieViewModel
              })
      }*/
 
-    fun getUpComingMovies() {
-        movies.value = repository.getUpComingMovies()
-            .cachedIn(viewModelScope).value
-
-    }
 
 }
