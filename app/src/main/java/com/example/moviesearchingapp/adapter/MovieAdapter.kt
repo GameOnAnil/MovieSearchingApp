@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesearchingapp.R
 import com.example.moviesearchingapp.databinding.MainRecyclerListBinding
+import com.example.moviesearchingapp.databinding.RecyclerUpcomingListBinding
 import com.example.moviesearchingapp.model.Movie
 
 class MovieAdapter(
@@ -28,7 +29,7 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding =
-            MainRecyclerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RecyclerUpcomingListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
     }
 
@@ -39,7 +40,7 @@ class MovieAdapter(
         }
     }
 
-    inner class MovieViewHolder(private val binding: MainRecyclerListBinding) :
+    inner class MovieViewHolder(private val binding: RecyclerUpcomingListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -57,12 +58,14 @@ class MovieAdapter(
         fun bindTo(movie: Movie) {
             binding.apply {
                 val imageUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path
-                titleText.text = movie.title
+                titleTextUpcoming.text = movie.title
+                textReleaseDateUpcoming.text = movie.release_date
+                textRatingUpcoming.text = movie.vote_average.toString()
                 if (movie.poster_path != null) {
                     Glide.with(itemView)
                         .load(imageUrl)
                         .placeholder(R.drawable.ic_baseline_image_24)
-                        .into(imageViewMain)
+                        .into(imageViewUpcoming)
                 }
 
             }

@@ -15,17 +15,18 @@ interface MovieApi {
 
 
     @GET("movie/popular")
-    fun getPopularMovies(
+    suspend fun getPopularMovies(
         @Query("api_key") apiKey: String
-    ): Call<MovieResponse>
+    ): MovieResponse
 
     @GET("movie/top_rated")
-    fun getTopRatedMovies(
+    suspend fun getTopRatedMovies(
         @Query("api_key") apiKey: String
-    ): Call<MovieResponse>
+    ): MovieResponse
 
     @GET("movie/upcoming")
-    fun getUpComingMovies(
-        @Query("api_key") apiKey: String
-    ): Call<MovieResponse>
+    suspend fun getUpComingMovies(
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int
+    ): MovieResponse
 }

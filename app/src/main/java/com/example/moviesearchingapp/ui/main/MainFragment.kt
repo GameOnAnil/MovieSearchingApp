@@ -37,14 +37,12 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
         _binding = FragmentMainBinding.inflate(layoutInflater)
 
         movieAdapter = MovieAdapter(this)
-        binding.recyclerViewMain.adapter = movieAdapter
+
+        binding.recyclerViewMainUpcoming.adapter = movieAdapter
+        binding.recyclerViewMainUpcoming.setHasFixedSize(true)
+
 
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
-
-        /* movieViewModel.searchedMovies.observe(viewLifecycleOwner, Observer {
-             movieAdapter.setMovie(it)
-             movieAdapter.notifyDataSetChanged()
-         })*/
 
         movieViewModel.movies.observe(viewLifecycleOwner, Observer {
             movieAdapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -76,7 +74,7 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    binding.recyclerViewMain.scrollToPosition(0)
+                    binding.recyclerViewMainUpcoming.scrollToPosition(0)
                     movieViewModel.searchWithQuery(query)
                     searchView.clearFocus()
                 }
@@ -95,12 +93,12 @@ class MainFragment : Fragment(), MovieAdapter.MovieListener {
         when (item.itemId) {
             R.id.item_popular -> {
                 Log.d(TAG, "onOptionsItemSelected: latest movie clicked")
-                movieViewModel.getPopularMovies()
+                //  movieViewModel.getPopularMovies()
                 return true
             }
             R.id.item_top_rated -> {
                 Log.d(TAG, "onOptionsItemSelected: Top rated Movies clicked")
-                movieViewModel.getTopRatedMovies()
+                //  movieViewModel.getTopRatedMovies()
                 return true
             }
             R.id.item_upcoming_movies -> {
