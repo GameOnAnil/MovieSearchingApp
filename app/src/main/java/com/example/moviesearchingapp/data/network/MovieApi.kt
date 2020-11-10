@@ -1,8 +1,10 @@
 package com.example.moviesearchingapp.data.network
 
+import com.example.moviesearchingapp.model.CreditResponse
 import com.example.moviesearchingapp.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApi {
@@ -31,4 +33,11 @@ interface MovieApi {
         @Query("api_key") apiKey: String,
         @Query("page") page: Int
     ): MovieResponse
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun getCredits(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+
+        ): CreditResponse
 }

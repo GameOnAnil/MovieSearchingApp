@@ -4,26 +4,31 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.moviesearchingapp.R
+import com.example.moviesearchingapp.adapter.CastAdapter
 import com.example.moviesearchingapp.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_details.*
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var detailsViewModel: DetailsViewModel
+    private lateinit var castAdapter: CastAdapter
 
     companion object {
         private const val TAG = "DetailsFragment"
@@ -38,6 +43,21 @@ class DetailsFragment : Fragment() {
 
         val args = DetailsFragmentArgs.fromBundle(requireArguments())
         val currentMovie = args.movie
+
+        castAdapter = CastAdapter()
+        detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
+
+        binding.recyclerCast.adapter = castAdapter
+
+        Log.d(TAG, "onCreateView: movieId: ${currentMovie.id}")
+        detailsViewModel.getCast(currentMovie.id)
+        detailsViewModel.crewDetail.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "onCreateView: $it")
+            castAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            castAdapter.notifyDataSetChanged()
+
+        })
+
 
         binding.apply {
             if (currentMovie.backdrop_path != null) {
@@ -96,6 +116,8 @@ class DetailsFragment : Fragment() {
             detailDescription.text = currentMovie.overview
             detailsRating.text = currentMovie.vote_average.toString()
         }
+
+
 
 
 
