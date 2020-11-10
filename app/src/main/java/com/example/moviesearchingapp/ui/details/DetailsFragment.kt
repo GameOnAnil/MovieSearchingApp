@@ -1,5 +1,6 @@
 package com.example.moviesearchingapp.ui.details
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.bumptech.glide.request.target.Target
 import com.example.moviesearchingapp.R
 import com.example.moviesearchingapp.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_details.*
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -27,6 +29,7 @@ class DetailsFragment : Fragment() {
         private const val TAG = "DetailsFragment"
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +46,7 @@ class DetailsFragment : Fragment() {
 
                 Glide.with(this@DetailsFragment)
                     .load(imageUrl)
-                    .centerCrop()
+                    .optionalCenterCrop()
                     .placeholder(R.drawable.ic_baseline_image_24)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
@@ -66,7 +69,13 @@ class DetailsFragment : Fragment() {
                             detailImage.visibility = VISIBLE
                             detailDescription.visibility = VISIBLE
                             detailTitle.visibility = VISIBLE
+                            detailsRating.visibility = VISIBLE
+                            detailsReleaseDate.visibility = VISIBLE
+                            detailsSynopsisText.visibility = VISIBLE
+                            ratingText.visibility = VISIBLE
                             progressBarDetails.visibility = GONE
+
+
 
                             return false
                         }
@@ -76,10 +85,16 @@ class DetailsFragment : Fragment() {
                 detailImage.visibility = VISIBLE
                 detailDescription.visibility = VISIBLE
                 detailTitle.visibility = VISIBLE
+                detailsRating.visibility = VISIBLE
+                detailsReleaseDate.visibility = VISIBLE
+                detailsSynopsisText.visibility = VISIBLE
+                ratingText.visibility = VISIBLE
                 progressBarDetails.visibility = GONE
             }
+            detailsReleaseDate.text = currentMovie.release_date
             detailTitle.text = currentMovie.title
             detailDescription.text = currentMovie.overview
+            detailsRating.text = currentMovie.vote_average.toString()
         }
 
 

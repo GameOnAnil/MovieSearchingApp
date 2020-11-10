@@ -32,9 +32,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/image_view_main"
-        android:layout_toRightOf="@+id/image_view_main"
         android:textColor="#000"
         tools:text="20 November 2020" />
 
@@ -46,9 +44,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginRight="10dp"
         android:layout_toEndOf="@id/text_release_date"
-        android:layout_toRightOf="@id/text_release_date"
         tools:text="1:30 hr" />
 
     <TextView
@@ -57,16 +53,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_movie_duration"
         android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@id/image_view_main"
-        android:layout_toRightOf="@id/image_view_main"
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="18sp"
         app:drawableLeftCompat="@drawable/ic_baseline_star_24"
         app:drawableStartCompat="@drawable/ic_baseline_star_24"
+        app:drawableTint="@color/starGold"
         tools:text="7.5" />
 
 

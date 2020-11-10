@@ -1,4 +1,4 @@
-package com.example.moviesearchingapp.data
+package com.example.moviesearchingapp.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -14,11 +14,6 @@ import javax.inject.Singleton
 @Singleton
 class MovieRepository
 @Inject constructor(private val movieApi: MovieApi) {
-
-    /* fun searchMovie(apiKey: String, query: String): Call<MovieResponse> {
-         return movieApi.searchMovie(apiKey, query)
-     }*/
-
 
     fun getPopularMovies() =
         Pager(

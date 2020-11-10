@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,35 +24,100 @@
 
             <ImageView
                 android:id="@+id/detail_image"
-                android:layout_width="300dp"
+                android:layout_width="400dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_baseline_image_24"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/detail_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:visibility="gone"
-                tools:text="Demo Title"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/detail_description"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:visibility="gone"
-                tools:text="@tools:sample/lorem/random"
-                tools:visibility="visible" />
+                android:layout_margin="5dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/detail_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:text="Demo Title"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/details_release_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_title"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone"
+                        tools:text="20 November 2929"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/details_synopsis_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/details_release_date"
+                        android:layout_marginTop="10dp"
+                        android:text="Synopsis:"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/detail_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/details_synopsis_text"
+                        android:textColor="#000"
+                        android:textStyle="italic"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/rating_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_description"
+                        android:layout_marginTop="10dp"
+                        android:text="Rating: "
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/details_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_description"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@+id/rating_text"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        app:drawableStartCompat="@drawable/ic_baseline_star_24"
+                        app:drawableTint="@color/starGold"
+                        tools:text="9.1"
+                        tools:visibility="visible" />
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
         </LinearLayout>
     </ScrollView>
 

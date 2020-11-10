@@ -4,7 +4,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.cachedIn
-import com.example.moviesearchingapp.data.MovieRepository
+import com.example.moviesearchingapp.repository.MovieRepository
 import dagger.hilt.android.scopes.ViewScoped
 
 @ViewScoped
