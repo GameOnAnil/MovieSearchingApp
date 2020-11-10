@@ -87,55 +87,6 @@ class MainFragment : Fragment(), UpcomingMovieAdapter.MovieListener, PopularAdap
         findNavController().navigate(action)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main_menu, menu)
-
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    binding.recyclerViewMainUpcoming.scrollToPosition(0)
-                    movieViewModel.searchWithQuery(query)
-                    searchView.clearFocus()
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
-
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_popular -> {
-                Log.d(TAG, "onOptionsItemSelected: latest movie clicked")
-                //  movieViewModel.getPopularMovies()
-                return true
-            }
-            R.id.item_top_rated -> {
-                Log.d(TAG, "onOptionsItemSelected: Top rated Movies clicked")
-                //  movieViewModel.getTopRatedMovies()
-                return true
-            }
-            R.id.item_upcoming_movies -> {
-                Log.d(TAG, "onOptionsItemSelected: Upcoming Movies clicked")
-
-                return true
-            }
-            else -> {
-                return super.onOptionsItemSelected(item)
-            }
-        }
-
-    }
-
     override fun onPopularMovieClicked(movie: Movie, position: Int) {
         val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(movie, position)
         findNavController().navigate(action)

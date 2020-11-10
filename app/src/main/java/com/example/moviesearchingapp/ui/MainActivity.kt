@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.moviesearchingapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +28,15 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.mainFragment, R.id.searchFragment)
+        )
         setSupportActionBar(toolbar_main)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
+
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        bottom_nav.setupWithNavController(navController)
 
     }
 
