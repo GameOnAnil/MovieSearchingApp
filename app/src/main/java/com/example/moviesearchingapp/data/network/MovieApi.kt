@@ -1,6 +1,7 @@
 package com.example.moviesearchingapp.data.network
 
-import com.example.moviesearchingapp.model.CreditResponse
+import com.example.moviesearchingapp.model.CastResponse
+import com.example.moviesearchingapp.model.CrewResponse
 import com.example.moviesearchingapp.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -35,9 +36,14 @@ interface MovieApi {
     ): MovieResponse
 
     @GET("movie/{movie_id}/credits")
-    suspend fun getCredits(
+    suspend fun getCast(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String,
+    ): CastResponse
 
-        ): CreditResponse
+    @GET("movie/{movie_id}/credits")
+    fun getCrew(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+    ): Call<CrewResponse>
 }

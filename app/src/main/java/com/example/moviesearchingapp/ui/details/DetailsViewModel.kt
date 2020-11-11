@@ -9,7 +9,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.moviesearchingapp.model.Cast
-import com.example.moviesearchingapp.model.CreditResponse
+import com.example.moviesearchingapp.model.Crew
+import com.example.moviesearchingapp.model.CrewResponse
 import com.example.moviesearchingapp.repository.MovieRepository
 import dagger.hilt.android.scopes.ViewScoped
 import retrofit2.Call
@@ -21,10 +22,29 @@ class DetailsViewModel
 @ViewModelInject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
-    lateinit var crewDetail: LiveData<PagingData<Cast>>
+    companion object {
+        private const val TAG = "DetailsViewModel"
+    }
+
+    lateinit var castDetail: LiveData<PagingData<Cast>>
+    var crewDetail: MutableLiveData<List<Crew>> = MutableLiveData()
 
     fun getCast(movieId: Int) {
-        crewDetail = repository.getCast(movieId).cachedIn(viewModelScope)
+        castDetail = repository.getCast(movieId).cachedIn(viewModelScope)
     }
+
+    fun getCrew(movieId: Int) {
+        repository.getCrew(movieId).enqueue(object : Callback<CrewResponse> {
+            override fun onResponse(call: Call<CrewResponse>, response: Response<CrewResponse>) {
+                crewDetail.value = response.body()?.crew
+            }
+
+            override fun onFailure(call: Call<CrewResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+
+        })
+    }
+
 
 }

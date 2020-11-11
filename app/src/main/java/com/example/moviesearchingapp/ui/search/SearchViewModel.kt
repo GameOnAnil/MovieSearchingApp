@@ -15,7 +15,7 @@ class SearchViewModel
 ) : ViewModel() {
     companion object {
         private const val CURRENT_QUERY = "current_query"
-        private const val DEFAULT_QUERY = "avengers"
+        private const val DEFAULT_QUERY = ""
     }
 
 

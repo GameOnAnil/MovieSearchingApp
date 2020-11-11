@@ -51,11 +51,52 @@ class DetailsFragment : Fragment() {
 
         Log.d(TAG, "onCreateView: movieId: ${currentMovie.id}")
         detailsViewModel.getCast(currentMovie.id)
-        detailsViewModel.crewDetail.observe(viewLifecycleOwner, Observer {
+        detailsViewModel.castDetail.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: $it")
             castAdapter.submitData(viewLifecycleOwner.lifecycle, it)
             castAdapter.notifyDataSetChanged()
 
+        })
+
+        detailsViewModel.getCrew(currentMovie.id)
+        detailsViewModel.crewDetail.observe(viewLifecycleOwner, Observer {
+            val director = it.filter { crewValue ->
+                crewValue.department == "Directing"
+            }
+            val writers = it.filter { crewValue ->
+                crewValue.department == "Writing"
+            }
+            Log.d(TAG, "onCreateView: director size: ${director.size}")
+
+            if (director.size > 1) {
+                var fullDirectors = ""
+                for (index in director.indices) {
+                    if (index != director.lastIndex) {
+                        fullDirectors += "${director[index].name} , "
+
+
+                    } else {
+                        fullDirectors += director[index].name
+                    }
+                }
+                binding.detailsDirectorNames.text = fullDirectors
+            } else {
+                binding.detailsDirectorNames.text = director[0].name
+            }
+
+            if (writers.size > 1) {
+                var fullWriter: String = ""
+                for (index in writers.indices) {
+                    fullWriter += if (index != writers.lastIndex) {
+                        "${writers[index].name} , "
+                    } else {
+                        writers[index].name
+                    }
+                }
+                binding.detailsWriterNames.text = fullWriter
+            } else {
+                binding.detailsWriterNames.text = writers[0].name
+            }
         })
 
 
@@ -93,9 +134,14 @@ class DetailsFragment : Fragment() {
                             detailsReleaseDate.visibility = VISIBLE
                             detailsSynopsisText.visibility = VISIBLE
                             ratingText.visibility = VISIBLE
+                            detailsCrewText.visibility = VISIBLE
+                            recyclerCast.visibility = VISIBLE
+                            directorText.visibility = VISIBLE
+                            detailsDirectorNames.visibility = VISIBLE
+                            writerText.visibility = VISIBLE
+                            detailsWriterNames.visibility = VISIBLE
+
                             progressBarDetails.visibility = GONE
-
-
 
                             return false
                         }
@@ -109,6 +155,13 @@ class DetailsFragment : Fragment() {
                 detailsReleaseDate.visibility = VISIBLE
                 detailsSynopsisText.visibility = VISIBLE
                 ratingText.visibility = VISIBLE
+                detailsCrewText.visibility = VISIBLE
+                recyclerCast.visibility = VISIBLE
+                directorText.visibility = VISIBLE
+                detailsDirectorNames.visibility = VISIBLE
+                writerText.visibility = VISIBLE
+                detailsWriterNames.visibility = VISIBLE
+
                 progressBarDetails.visibility = GONE
             }
             detailsReleaseDate.text = currentMovie.release_date
@@ -116,8 +169,6 @@ class DetailsFragment : Fragment() {
             detailDescription.text = currentMovie.overview
             detailsRating.text = currentMovie.vote_average.toString()
         }
-
-
 
 
 

@@ -1,7 +1,5 @@
 package com.example.moviesearchingapp.repository
 
-import android.provider.SyncStateContract
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
@@ -76,12 +74,12 @@ class MovieRepository
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                CreditsPagingSource(movieApi, movieId)
+                CastPagingSource(movieApi, movieId)
 
             }
         ).liveData
-/*
-    fun getCast(movieId: Int) =
-        movieApi.getCredits(movieId,Constants.API_KEY)*/
+
+    fun getCrew(movieId: Int) =
+        movieApi.getCrew(movieId, Constants.API_KEY)
 
 }

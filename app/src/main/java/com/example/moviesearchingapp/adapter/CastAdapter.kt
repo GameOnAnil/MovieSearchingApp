@@ -35,7 +35,6 @@ class CastAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val currentCast = getItem(position)
-        Log.d("TAG", "onBindViewHolder: currentCast: $currentCast")
         if (currentCast != null) {
             holder.bindTo(currentCast)
         }

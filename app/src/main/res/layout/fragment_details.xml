@@ -74,7 +74,9 @@
                         android:text="Synopsis:"
                         android:textColor="#000"
                         android:textSize="17sp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/detail_description"
@@ -134,7 +136,9 @@
                         android:layout_height="wrap_content"
                         android:text="Crew"
                         android:textColor="#000"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_cast"
@@ -143,7 +147,57 @@
                         android:layout_below="@+id/details_crew_text"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/recycler_cast_list" />
+                        android:visibility="gone"
+                        tools:listitem="@layout/recycler_cast_list"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/director_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/recycler_cast"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Director: "
+                        android:textColor="@color/textBlack"
+                        android:textSize="15sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/details_director_names"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/director_text"
+                        android:layout_marginStart="5dp"
+                        android:textSize="15sp"
+                        android:visibility="gone"
+                        tools:text="Robert Gilbert"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/writer_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/details_director_names"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Writers: "
+                        android:textColor="@color/textBlack"
+                        android:textSize="15sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/details_writer_names"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/writer_text"
+                        android:layout_marginStart="5dp"
+                        android:textSize="15sp"
+                        android:visibility="gone"
+                        tools:text="Robert Gilbert"
+                        tools:visibility="visible" />
                 </RelativeLayout>
 
 

@@ -10,7 +10,7 @@ import com.example.moviesearchingapp.utils.Constants
 import retrofit2.HttpException
 import java.io.IOException
 
-class CreditsPagingSource(
+class CastPagingSource(
     private val movieApi: MovieApi,
     private val movieId: Int
 ) : PagingSource<Int, Cast>(
@@ -23,10 +23,8 @@ class CreditsPagingSource(
         val position = params.key ?: 1
 
         return try {
-            val response = movieApi.getCredits(movieId, Constants.API_KEY)
-            Log.d(TAG, "load: response: $response")
+            val response = movieApi.getCast(movieId, Constants.API_KEY)
             val cast = response.cast
-            Log.d(TAG, "load: castSize: ${cast.size}")
             LoadResult.Page(
                 data = cast,
                 prevKey = if (position == 1) null else position - 1,
