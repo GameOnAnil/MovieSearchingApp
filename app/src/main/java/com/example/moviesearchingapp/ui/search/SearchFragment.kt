@@ -1,13 +1,18 @@
 package com.example.moviesearchingapp.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.example.moviesearchingapp.R
+import com.example.moviesearchingapp.adapter.MainLoadStateAdapter
 import com.example.moviesearchingapp.adapter.SearchAdapter
 import com.example.moviesearchingapp.databinding.FragmentSearchBinding
 import com.example.moviesearchingapp.model.Movie
@@ -22,6 +27,10 @@ class SearchFragment : Fragment(), SearchAdapter.MovieListener {
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var searchViewModel: SearchViewModel
 
+    companion object {
+        private const val TAG = "SearchFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +42,7 @@ class SearchFragment : Fragment(), SearchAdapter.MovieListener {
 
         searchAdapter = SearchAdapter(this)
 
-        binding.recyclerViewSearch.adapter = searchAdapter
+        initAdapter()
 
         searchViewModel.searchedMovies.observe(viewLifecycleOwner, Observer {
             searchAdapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -42,6 +51,39 @@ class SearchFragment : Fragment(), SearchAdapter.MovieListener {
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    private fun initAdapter() {
+        binding.apply {
+            recyclerViewSearch.adapter = searchAdapter.withLoadStateHeaderAndFooter(
+                header = MainLoadStateAdapter { searchAdapter.retry() },
+                footer = MainLoadStateAdapter { searchAdapter.retry() }
+            )
+
+            searchAdapter.addLoadStateListener { loadState ->
+                // Only show the list if refresh succeeds.
+                binding.recyclerViewSearch.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
+                // Show loading spinner during initial load or refresh.
+                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                // Show the retry state if initial load or refresh fails.
+                //   binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+                errorState?.let {
+                    Log.d(TAG, "initAdapter: error: ${it.error}")
+                    Toast.makeText(
+                        activity,
+                        "\uD83D\uDE28 Wooops ${it.error}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
