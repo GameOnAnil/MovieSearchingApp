@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesearchingapp.R
-
-import com.example.moviesearchingapp.databinding.RecyclerPopularListBinding
-import com.example.moviesearchingapp.databinding.RecyclerUpcomingListBinding
+import com.example.moviesearchingapp.databinding.RecyclerMainListBinding
 import com.example.moviesearchingapp.model.Movie
 
 class PopularAdapter(
@@ -30,7 +28,7 @@ class PopularAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding =
-            RecyclerPopularListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RecyclerMainListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
     }
 
@@ -41,7 +39,7 @@ class PopularAdapter(
         }
     }
 
-    inner class MovieViewHolder(private val binding: RecyclerPopularListBinding) :
+    inner class MovieViewHolder(private val binding: RecyclerMainListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -59,14 +57,14 @@ class PopularAdapter(
         fun bindTo(movie: Movie) {
             binding.apply {
                 val imageUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path
-                titleTextUpcoming.text = movie.title
-                textReleaseDateUpcoming.text = movie.release_date
-                textRatingUpcoming.text = movie.vote_average.toString()
+                titleText.text = movie.title
+                textReleaseDate.text = movie.release_date
+                textRating.text = movie.vote_average.toString()
                 if (movie.poster_path != null) {
                     Glide.with(itemView)
                         .load(imageUrl)
                         .placeholder(R.drawable.ic_baseline_image_24)
-                        .into(imageViewUpcoming)
+                        .into(imageView)
                 }
 
             }

@@ -14,14 +14,11 @@
 
     <TextView
         android:id="@+id/title_text"
+        style="@style/TextAppearance.SubText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/image_view_main"
-        android:layout_toRightOf="@+id/image_view_main"
-        android:textColor="#000"
-        android:textSize="18sp"
         tools:text="Demo Title" />
 
     <TextView
@@ -33,7 +30,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/image_view_main"
-        android:textColor="#000"
         tools:text="20 November 2020" />
 
     <TextView
@@ -57,8 +53,7 @@
         android:layout_toEndOf="@id/image_view_main"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="18sp"
+        style="@style/TextAppearance.SubText"
         app:drawableLeftCompat="@drawable/ic_baseline_star_24"
         app:drawableStartCompat="@drawable/ic_baseline_star_24"
         app:drawableTint="@color/starGold"

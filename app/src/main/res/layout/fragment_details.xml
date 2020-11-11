@@ -14,7 +14,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dark3">
 
 
         <LinearLayout
@@ -35,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:background="@color/dark2"
                 android:elevation="20dp">
 
                 <RelativeLayout
@@ -44,12 +46,11 @@
 
                     <TextView
                         android:id="@+id/detail_title"
+                        style="@style/TextAppearance.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="10dp"
-                        android:textColor="#000"
-                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:visibility="gone"
                         tools:text="Demo Title"
@@ -67,13 +68,12 @@
 
                     <TextView
                         android:id="@+id/details_synopsis_text"
+                        style="@style/TextAppearance.SubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/details_release_date"
                         android:layout_marginTop="10dp"
                         android:text="Synopsis:"
-                        android:textColor="#000"
-                        android:textSize="17sp"
                         android:textStyle="italic"
                         android:visibility="gone"
                         tools:visibility="visible" />
@@ -83,32 +83,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/details_synopsis_text"
-                        android:textColor="#000"
+                        android:textColor="#fff"
                         android:textStyle="italic"
                         android:visibility="gone"
                         tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/rating_text"
+                        style="@style/TextAppearance.SubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/detail_description"
                         android:layout_marginTop="10dp"
                         android:text="Rating: "
-                        android:textColor="#000"
-                        android:textSize="18sp"
                         android:visibility="gone"
                         tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/details_rating"
+                        style="@style/TextAppearance.SubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/detail_description"
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@+id/rating_text"
-                        android:textColor="#000"
-                        android:textSize="18sp"
                         android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_star_24"
                         app:drawableTint="@color/starGold"
@@ -123,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:background="@color/dark2"
                 android:elevation="20dp">
 
                 <RelativeLayout
@@ -132,11 +131,10 @@
 
                     <TextView
                         android:id="@+id/details_crew_text"
+                        style="@style/TextAppearance.SubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Crew"
-                        android:textColor="#000"
-                        android:textSize="18sp"
                         android:visibility="gone"
                         tools:visibility="visible" />
 
@@ -146,8 +144,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/details_crew_text"
                         android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/recycler_cast_list"
                         tools:visibility="visible" />
 
@@ -159,7 +157,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:text="Director: "
-                        android:textColor="@color/textBlack"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         android:visibility="gone"
                         tools:visibility="visible" />
@@ -183,7 +181,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:text="Writers: "
-                        android:textColor="@color/textBlack"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         android:visibility="gone"
                         tools:visibility="visible" />

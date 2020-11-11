@@ -9,11 +9,11 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
         android:layout_alignParentTop="true"
-        android:background="@color/orangePrimary"
+        android:background="@color/dark1"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/Theme.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_container"
@@ -30,5 +30,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu" />
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:background="@color/dark1"
+        app:menu="@menu/bottom_nav_menu"
+        tools:layout_height="?actionBarSize"
+
+
+        />
 </RelativeLayout>

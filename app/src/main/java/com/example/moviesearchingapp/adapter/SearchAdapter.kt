@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesearchingapp.R
-
-import com.example.moviesearchingapp.databinding.RecyclerUpcomingListBinding
 import com.example.moviesearchingapp.databinding.SearchRecyclerListBinding
 import com.example.moviesearchingapp.model.Movie
 

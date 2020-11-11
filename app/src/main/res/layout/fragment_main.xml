@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whiteGray">
+        android:background="@color/dark3">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -19,7 +19,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/dark2"
                 android:elevation="25dp">
 
                 <LinearLayout
@@ -28,12 +29,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/TextAppearance.Title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Upcoming Movies"
-                        android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:textColor="@color/yellowTitle" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_main_upcoming"
@@ -44,14 +45,15 @@
                         android:padding="7dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="10"
-                        tools:listitem="@layout/recycler_upcoming_list" />
+                        tools:listitem="@layout/recycler_main_list" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/dark2"
                 android:elevation="25dp">
 
                 <LinearLayout
@@ -60,12 +62,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/TextAppearance.Title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Top Rated Movies"
-                        android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:textColor="@color/yellowTitle" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_top_rated"
@@ -76,14 +78,14 @@
                         android:padding="7dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="10"
-                        tools:listitem="@layout/recycler_upcoming_list" />
+                        tools:listitem="@layout/recycler_main_list" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/dark2"
                 android:elevation="25dp">
 
                 <LinearLayout
@@ -92,12 +94,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/TextAppearance.Title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Popular Movies"
-                        android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:textColor="@color/yellowTitle" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_popular"
@@ -108,7 +110,7 @@
                         android:padding="7dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="10"
-                        tools:listitem="@layout/recycler_upcoming_list" />
+                        tools:listitem="@layout/recycler_main_list" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

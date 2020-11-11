@@ -2,10 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="140dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="#ffffff"
+    android:backgroundTint="@color/dark1"
     android:elevation="35dp"
     android:orientation="vertical"
     app:cardCornerRadius="5dp">
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
             android:src="@drawable/ic_baseline_image_24" />
 
         <TextView
@@ -27,8 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:singleLine="true"
-            android:textColor="#000"
-            android:textSize="18sp"
+            style="@style/TextAppearance.SubText"
             tools:text="Demo Name" />
 
         <TextView
@@ -38,7 +37,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
-            android:textColor="#000"
             tools:text="James Bond" />
 
 
