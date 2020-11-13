@@ -1,4 +1,4 @@
-![](images/MovieBanner.jpg)
+![](images/MovieBanner.png)
 # Movie Finder App
 
 
