@@ -6,7 +6,7 @@
 
 ***You can Install and test latest Foodium app from below 👇***
 
-[**Download APK**](https://github.com/gameonanil/MovieSearchingApp/tree/master/app/release/app-release.apk)
+[![Movie Finder App](https://img.shields.io/badge/MovieFinder🍿-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/gameonanil/MovieSearchingApp/tree/master/app/release/app-release.apk)
 
 
 ## API USED:  
