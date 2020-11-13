@@ -2,15 +2,15 @@
 # Movie Finder App
 
 
-**Movie Finder** is a sample Android application 📱 built to demonstrate use of REST API to find different movies and their review. It uses data from TMDB servers get reviews. 
+**Movie Finder** is a simple Android application 📱 built to demonstrate use of REST API to find different movies and their review. It uses data from TMDB servers get reviews. 
 
 ***You can Install and test latest Foodium app from below 👇***
 
-[![Movie Finder]()
+[**Download APK**](https://github.com/gameonanil/MovieSearchingApp/tree/master/app/release/app-release.apk)
 
 
 ## API USED:  
- [The Movie Database (TMDB)](https://www.themoviedb.org/) - he Movie Database (TMDb) is a popular, user editable database for movies and TV shows.
+ [The Movie Database (TMDB)](https://www.themoviedb.org/) - The Movie Database (TMDb) is a popular, user editable database for movies and TV shows.
 
 
 ## Built With 🛠
