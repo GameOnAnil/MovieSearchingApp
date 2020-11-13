@@ -48,8 +48,6 @@ class DetailsFragment : Fragment() {
         detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
         binding.recyclerCast.adapter = castAdapter
-
-        Log.d(TAG, "onCreateView: movieId: ${currentMovie.id}")
         detailsViewModel.getCast(currentMovie.id)
         detailsViewModel.castDetail.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: $it")
@@ -107,7 +105,7 @@ class DetailsFragment : Fragment() {
 
                 Glide.with(this@DetailsFragment)
                     .load(imageUrl)
-                    .optionalCenterCrop()
+                    .centerCrop()
                     .placeholder(R.drawable.ic_baseline_image_24)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(

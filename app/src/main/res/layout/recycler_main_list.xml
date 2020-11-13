@@ -23,33 +23,35 @@
 
         <TextView
             android:id="@+id/title_text"
+            style="@style/TextAppearance.SubText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
             android:singleLine="true"
-            style="@style/TextAppearance.SubText"
             tools:text="Demo Title" />
 
         <TextView
             android:id="@+id/text_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
             android:textColor="@color/white"
             tools:text="20 November 2020" />
 
 
         <TextView
             android:id="@+id/text_rating"
+            style="@style/TextAppearance.SubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
             android:textAlignment="center"
-            style="@style/TextAppearance.SubText"
             app:drawableLeftCompat="@drawable/ic_baseline_star_24"
             app:drawableStartCompat="@drawable/ic_baseline_star_24"
             app:drawableTint="@color/starGold"
