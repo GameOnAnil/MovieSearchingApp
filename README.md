@@ -9,7 +9,7 @@
 [![Movie Finder]()
 
 
-##API USED:  
+## API USED:  
  [The Movie Database (TMDB)](https://www.themoviedb.org/) - he Movie Database (TMDb) is a popular, user editable database for movies and TV shows.
 
 
@@ -26,6 +26,6 @@
   - [Hilt-ViewModel](https://developer.android.com/training/dependency-injection/hilt-jetpack) - DI for injecting `ViewModel`.
 - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
 
-##Android Architecture Used- MVVM architecture
+## Android Architecture Used- MVVM architecture
 ![](images/mvvmArchitecture.png)
 
